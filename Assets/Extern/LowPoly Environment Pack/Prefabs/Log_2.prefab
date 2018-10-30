@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4449120862878004}
   - component: {fileID: 33116843740612510}
   - component: {fileID: 23480334074049270}
+  - component: {fileID: 65929873207258222}
+  - component: {fileID: 114424254310370764}
   m_Layer: 0
   m_Name: Log_2
   m_TagString: Untagged
@@ -34,8 +36,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1330862079685384}
-  m_LocalRotation: {x: 0.000000021855696, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.019202892, y: -0.017889034, z: 0}
+  m_LocalRotation: {x: 0.000000021855696, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.9095154, y: 0.47653198, z: -10.009033}
   m_LocalScale: {x: 5.9, y: 5.9, z: 5.9}
   m_Children: []
   m_Father: {fileID: 0}
@@ -50,9 +52,11 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 123ed9969563dc5468cd867af56caab9, type: 2}
   - {fileID: 2100000, guid: c47a8046d422cf44ab127456e4917876, type: 2}
@@ -66,6 +70,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -81,3 +86,27 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1330862079685384}
   m_Mesh: {fileID: 4300000, guid: a834527aa1ce23a40857bdc293825f3a, type: 3}
+--- !u!65 &65929873207258222
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1330862079685384}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15101461, y: 0.12798844, z: 0.6516013}
+  m_Center: {x: 0.017376764, y: 0.05995802, z: 0.06362012}
+--- !u!114 &114424254310370764
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1330862079685384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94725b92a5100e948aa889213515d54d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Explosion: {fileID: 1444412003953574, guid: 66ea23431fa5bd746a0f1c4b10c537be, type: 2}

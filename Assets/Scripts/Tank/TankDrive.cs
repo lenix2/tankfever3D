@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class TankDrive : NetworkBehaviour {
+public class TankDrive : NetworkBehaviour
+{
 
+	private float _speed = 8f;
+	
 	// Use this for initialization
 	void Start () {
-		if (!isLocalPlayer)
-		{
-			Destroy(this);
-		}
 	}
 	
 	// Update is called once per frame
@@ -21,6 +20,6 @@ public class TankDrive : NetworkBehaviour {
 
 	private void Drive()
 	{
-		this.gameObject.transform.position += this.gameObject.transform.forward * Time.deltaTime * 6f;
+		this.gameObject.transform.position += this.gameObject.transform.forward * Time.deltaTime * _speed;
 	}
 }
