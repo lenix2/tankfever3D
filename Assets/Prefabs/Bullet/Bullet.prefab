@@ -52,11 +52,12 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4086376157574836}
-  - component: {fileID: 135001641542356522}
   - component: {fileID: 114637988332555498}
-  - component: {fileID: 114489366382159028}
   - component: {fileID: 114076076158484284}
   - component: {fileID: 114693778690611398}
+  - component: {fileID: 114314928861896846}
+  - component: {fileID: 65753550133977124}
+  - component: {fileID: 54351474236286492}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Bullet
@@ -71,7 +72,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1989140509941212}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 552.55, y: 163.61, z: 1065.01}
+  m_LocalPosition: {x: 575.7649, y: 163.34, z: 991.6985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4123288944761102}
@@ -147,6 +148,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1141129461330276}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54351474236286492
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1989140509941212}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &65753550133977124
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1989140509941212}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!96 &96832780051615132
 TrailRenderer:
   serializedVersion: 2
@@ -258,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afd229cfc07d7ef418d2e5001dc7d763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114489366382159028
+--- !u!114 &114314928861896846
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -266,19 +294,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1989140509941212}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 201ed2c820745ec42b50f6ea4734d1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
+  Explosion: {fileID: 1161848017549226, guid: cac7f29e56fab884697bc33c2d4b0120, type: 2}
 --- !u!114 &114637988332555498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -323,15 +342,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Deathtimer: 5
---- !u!135 &135001641542356522
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1989140509941212}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

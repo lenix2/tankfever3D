@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c73ab841ad15f42b63371f1ed23ba1, type: 3}
   m_Name: WorldCompressionSettings
   m_EditorClassIdentifier: 
-  minPosResolution: 100
+  minPosResolution: 65
   defaultWorldBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 320, y: 320, z: 320}

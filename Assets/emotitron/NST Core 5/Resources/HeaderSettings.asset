@@ -11,9 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03e747efa2f6cd8428516cb64c8405aa, type: 3}
   m_Name: HeaderSettings
   m_EditorClassIdentifier: 
-  bitsForNstId: 6
+  bitsForNstId: 5
   bitsForPUNClients: 10
   bitsForPUNEntities: 10
-  MaxNSTObjects: 64
-  TickEveryXFixed: 2
-  masterMsgTypeId: 190
+  MaxNSTObjects: 32
+  TickEveryXFixed: 3
+  masterMsgTypeId: 47

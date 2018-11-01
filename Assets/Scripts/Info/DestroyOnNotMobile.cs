@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyOnProductive : MonoBehaviour {
+public class DestroyOnNotMobile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if (!Application.isEditor)
+		if (Application.platform != RuntimePlatform.Android)
 		{
 			Destroy(this.gameObject);
 		}

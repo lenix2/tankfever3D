@@ -8,7 +8,6 @@ public class TankShoot : NetworkBehaviour
 
 	public GameObject Bullet;
 	
-	[SyncVar]
 	private float _ammoCount;
 	
 	private float _timer = 0f;
@@ -16,7 +15,7 @@ public class TankShoot : NetworkBehaviour
 	
 	// Use this for initialization
 	void Start () {
-		_ammoCount = 3f;
+		_ammoCount = 300f;
 	}
 
 	// Update is called once per frame
@@ -37,25 +36,11 @@ public class TankShoot : NetworkBehaviour
 		{
 			_timer = 0f;
 			_ammoCount--;
-			if (isServer)
-			{
-				Shoot();
-			}
-			else
+			if (isLocalPlayer)
 			{
 				CmdShoot();
 			}
 		}
-	}
-
-	private void Shoot()
-	{
-		//Instantiate the prefab
-		GameObject m_Bullet = Instantiate(Bullet);
-		m_Bullet.transform.position = transform.position + transform.forward * 5;
-		m_Bullet.transform.rotation = transform.rotation;
-		//Spawn the GameObject you assign in the Inspector
-		NetworkServer.Spawn(m_Bullet);
 	}
 
 	[Command]
@@ -66,7 +51,6 @@ public class TankShoot : NetworkBehaviour
 
 		m_Bullet.transform.position = transform.position + transform.forward * 5;
 		m_Bullet.transform.rotation = transform.rotation;
-		//Spawn the GameObject you assign in the Inspector
 		NetworkServer.Spawn(m_Bullet);
 	}
 }

@@ -9,6 +9,7 @@ public class TankHealth : NetworkBehaviour
 {
 
 	public Slider HealthSlider;
+	public GameObject Explosion;
 	
 	[SyncVar]
 	public Boolean IsAlive;
@@ -20,6 +21,11 @@ public class TankHealth : NetworkBehaviour
 	
 	void Start ()
 	{
+		
+	}
+
+	private void OnEnable()
+	{
 		Hitpoints = _maxHP;
 		HealthSlider.maxValue = _maxHP;
 		HealthSlider.minValue = 0f;
@@ -27,11 +33,22 @@ public class TankHealth : NetworkBehaviour
 
 		UpdateHP();
 	}
-	
+
 	// Update is called once per frame
 	void Update ()
 	{
 		UpdateHP();
+	}
+
+	private void OnCollisionEnter(Collision other)
+	{
+		if(other.collider.CompareTag("Border"))
+		{
+			if (isServer)
+			{
+				DoDmg(1000f);
+			}
+		}
 	}
 
 	private void UpdateHP()
@@ -63,5 +80,13 @@ public class TankHealth : NetworkBehaviour
 		{
 			IsAlive = false;
 		}
+
+		Explode();
+		gameObject.SetActive(false);
+	}
+	
+	private void Explode()
+	{
+		Instantiate(Explosion, transform.position, transform.rotation);
 	}
 }
