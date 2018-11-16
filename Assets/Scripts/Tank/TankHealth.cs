@@ -18,10 +18,16 @@ public class TankHealth : NetworkBehaviour
 	public float Hitpoints;
 	
 	private float _maxHP = 100f;
+
+	private GameManager _gameManager;
 	
 	void Start ()
 	{
-		
+		GameObject[] go = GameObject.FindGameObjectsWithTag("Gamemanager");
+		if (go.Length > 0)
+		{
+			_gameManager = go[0].GetComponent<GameManager>();
+		}
 	}
 
 	private void OnEnable()
@@ -56,6 +62,9 @@ public class TankHealth : NetworkBehaviour
 		HealthSlider.value = Hitpoints;
 	}
 
+	/**
+	 * DO Dmg only on server with later sync
+	 */
 	public void DoDmg(float dmg)
 	{
 		if (isServer)
@@ -74,17 +83,37 @@ public class TankHealth : NetworkBehaviour
 		
 	}
 
+	/**
+	 * Kill Player on Server
+	 */
 	private void Death()
 	{
 		if (isServer)
 		{
 			IsAlive = false;
+			_gameManager.TankDied(this.gameObject);
+			RpcDeath();
 		}
 
 		Explode();
 		gameObject.SetActive(false);
 	}
 	
+	/**
+	 * Kill Player on Client
+	 */
+	[ClientRpc]
+	private void RpcDeath()
+	{
+		IsAlive = false;
+
+		Explode();
+		gameObject.SetActive(false);
+	}
+	
+	/**
+	 * Spawn Explosion
+	 */
 	private void Explode()
 	{
 		Instantiate(Explosion, transform.position, transform.rotation);

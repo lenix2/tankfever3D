@@ -15,5 +15,5 @@ MonoBehaviour:
   bitsForPUNClients: 10
   bitsForPUNEntities: 10
   MaxNSTObjects: 32
-  TickEveryXFixed: 3
+  TickEveryXFixed: 2
   masterMsgTypeId: 47

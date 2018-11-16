@@ -9,6 +9,8 @@ TagManager:
   - Bullet
   - Border
   - Item
+  - Spawn
+  - Gamemanager
   layers:
   - Default
   - TransparentFX

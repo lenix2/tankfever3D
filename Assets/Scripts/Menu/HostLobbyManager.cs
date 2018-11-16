@@ -46,6 +46,8 @@ public class HostLobbyManager : MonoBehaviour
 						PlayerPanels[i].GetComponentsInChildren<Text>()[0].enabled = false;
 					}
 					
+					// Set Colorindex
+					NetworkLobbyManager.lobbySlots[i].gameObject.GetComponent<ColorControll>().SetColor(i);
 				}
 				else
 				{
@@ -63,6 +65,8 @@ public class HostLobbyManager : MonoBehaviour
 			{
 				if (NetworkLobbyManager.lobbySlots[i].hasAuthority) // Get Local LobbyPlayer
 				{
+					
+					// Set Ready/Not Ready
 					if (!NetworkLobbyManager.lobbySlots[i].readyToBegin)
 					{
 						NetworkLobbyManager.lobbySlots[i].SendReadyToBeginMessage();
