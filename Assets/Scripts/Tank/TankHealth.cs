@@ -23,11 +23,12 @@ public class TankHealth : NetworkBehaviour
 	
 	void Start ()
 	{
-		GameObject[] go = GameObject.FindGameObjectsWithTag("Gamemanager");
-		if (go.Length > 0)
-		{
-			_gameManager = go[0].GetComponent<GameManager>();
-		}
+	
+	}
+
+	public void SetGameManager(GameManager gm)
+	{
+		_gameManager = gm;
 	}
 
 	private void OnEnable()

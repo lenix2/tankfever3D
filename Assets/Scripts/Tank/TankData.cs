@@ -18,9 +18,6 @@ public class TankData : NetworkBehaviour
 	
 	// Use this for initialization
 	void Start () {
-		Debug.Log(isClient);
-		Debug.Log(isServer);
-		Debug.Log(isLocalPlayer);
 	}
 
 	private void OnEnable()
@@ -36,8 +33,6 @@ public class TankData : NetworkBehaviour
 	// apply color to model
 	private void ApplyColor()
 	{
-		Debug.Log("APPLY COLOR" + _tankColor);
-		
 		int c1 = _tankColor;
 		int c2 = _tankColor + 4;
 

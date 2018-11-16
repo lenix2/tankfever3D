@@ -6,27 +6,34 @@ using UnityEngine.Networking;
 public class GameManager : NetworkBehaviour
 {
 
+	public GameInfo GameInfo;
+	public PointsInfo PointsInfo;
 
 	private GameObject[] _tanks;
 	private GameObject[] _spawns;
-
-	private float _time;
 	
 	// Use this for initialization
 	void Start () {
 		_tanks = GameObject.FindGameObjectsWithTag("Tank");
 		_spawns = GameObject.FindGameObjectsWithTag("Spawn");
-		_time = 0;
+
+		foreach (var t in _tanks)
+		{
+			t.GetComponent<TankHealth>().SetGameManager(this);
+		}
 		
+		PointsInfo.SetTanks(_tanks);
+		PointsInfo.UpdatePoints();
 		DisableTanks();
 		StartRound();
 	}
 
 	private void StartRound()
 	{
+		SetTanksUnactive();
 		EnableTanks();
 		SpawnTanks();
-		SetTanksUnactive();
+		GameInfo.SetCountdown(3, "GO!");
 		Invoke("SetTanksActive", 3);
 	}
 	
@@ -59,6 +66,7 @@ public class GameManager : NetworkBehaviour
 			t.GetComponent<TankDrive>().enabled = true;
 			t.GetComponent<TankHealth>().enabled = true;
 			t.GetComponent<TankShoot>().enabled = true;
+			//t.GetComponent<TankRotate>().enabled = true;
 		}
 	}
 
@@ -69,6 +77,7 @@ public class GameManager : NetworkBehaviour
 			t.GetComponent<TankDrive>().enabled = false;
 			t.GetComponent<TankHealth>().enabled = false;
 			t.GetComponent<TankShoot>().enabled = false;
+			//t.GetComponent<TankRotate>().enabled = false;
 		}
 	}
 
@@ -77,11 +86,13 @@ public class GameManager : NetworkBehaviour
 		for (int i = 0; i < _tanks.Length; i++)
 		{
 			_tanks[i].transform.position = _spawns[i].transform.position;
+			_tanks[i].transform.rotation = _spawns[i].transform.rotation;
 		}
 	}
 
 	private void NextRound()
 	{
+		PointsInfo.UpdatePoints();
 		DisableTanks();
 		StartRound();
 	}
@@ -103,7 +114,7 @@ public class GameManager : NetworkBehaviour
 	
 			if (alive < 2)
 			{
-				Invoke("NextRound", 2);
+				Invoke("NextRound", 3);
 				RpcNextRound();
 			}
 		}
@@ -112,6 +123,6 @@ public class GameManager : NetworkBehaviour
 	[ClientRpc]
 	private void RpcNextRound()
 	{
-		Invoke("NextRound", 2);
+		Invoke("NextRound", 3);
 	}
 }
