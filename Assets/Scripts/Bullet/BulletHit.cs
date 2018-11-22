@@ -39,6 +39,15 @@ public class BulletHit : NetworkBehaviour
 				NetworkServer.Destroy(gameObject);
 				other.gameObject.GetComponent<TankHealth>().DoDmg(_dmg);
 			}
+		} else if (other.CompareTag("Bullet"))
+		{
+			Explode();
+			
+			if (isServer)
+			{
+				NetworkServer.Destroy(gameObject);
+				NetworkServer.Destroy(other.gameObject);
+			}
 		}
 	}
 

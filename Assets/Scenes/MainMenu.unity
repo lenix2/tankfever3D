@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -293,7 +293,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 69412464}
-  - component: {fileID: 69412465}
   - component: {fileID: 69412463}
   m_Layer: 0
   m_Name: NetworkManager
@@ -410,21 +409,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &69412465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 69412462}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 227461547, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  showGUI: 1
-  offsetX: 0
-  offsetY: 0
 --- !u!1 &137260590
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,7 +970,6 @@ MonoBehaviour:
   MainMenuPanel: {fileID: 592823755}
   MainMenuHostPanel: {fileID: 1046847701}
   MainMenuJoinPanel: {fileID: 1277733279}
-  NetworkLobbyManager: {fileID: 69412463}
 --- !u!1 &711319352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1314,7 +1297,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 67.82, y: 100}
+  m_AnchoredPosition: {x: 77.67, y: 100}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &811155087
@@ -1394,7 +1377,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: v0.4
+  m_Text: v0.6
 --- !u!222 &811155091
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1790,7 +1773,6 @@ MonoBehaviour:
   - {fileID: 606118154}
   - {fileID: 1817116915}
   - {fileID: 137260590}
-  NetworkLobbyManager: {fileID: 69412463}
 --- !u!1 &1053796809
 GameObject:
   m_ObjectHideFlags: 0
@@ -2648,7 +2630,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ListPanel: {fileID: 923690614}
   ListEntry: {fileID: 1962828304546226, guid: 28fd923247026f5418b6c11173311e18, type: 2}
-  NetworkLobbyManager: {fileID: 69412463}
   MenuManager: {fileID: 607573866}
   LandingPanel: {fileID: 1046847701}
 --- !u!1 &1364321512

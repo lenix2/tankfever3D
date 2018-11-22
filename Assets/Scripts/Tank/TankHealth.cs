@@ -23,7 +23,13 @@ public class TankHealth : NetworkBehaviour
 	
 	void Start ()
 	{
-	
+		GameObject[] go = GameObject.FindGameObjectsWithTag("Gamemanager");
+
+		if (go.Length > 0)
+		{
+			_gameManager = go[0].GetComponent<GameManager>();
+			_gameManager.NewTankLoaded();
+		}
 	}
 
 	public void SetGameManager(GameManager gm)
@@ -56,6 +62,26 @@ public class TankHealth : NetworkBehaviour
 				DoDmg(1000f);
 			}
 		}
+
+		if (other.collider.CompareTag("Tank"))
+		{
+			if (isServer)
+			{
+				if (other.gameObject.GetComponent<TankHealth>().GetHp() > GetHp())
+				{
+					DoDmg(1000f);
+					other.gameObject.GetComponent<TankHealth>().DoDmg(1000f);
+				} else if (other.gameObject.GetComponent<TankHealth>().GetHp() == GetHp())
+				{
+					if (other.gameObject.GetComponent<TankHealth>().IsAlive)
+					{
+						other.gameObject.GetComponent<TankData>().AddPoints(-1);
+					}
+					DoDmg(1000f);
+					other.gameObject.GetComponent<TankHealth>().DoDmg(1000f);
+				}
+			}
+		}
 	}
 
 	private void UpdateHP()
@@ -81,7 +107,11 @@ public class TankHealth : NetworkBehaviour
 				}
 			}
 		}
-		
+	}
+
+	public float GetHp()
+	{
+		return Hitpoints;
 	}
 
 	/**

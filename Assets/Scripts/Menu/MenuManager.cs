@@ -11,13 +11,15 @@ public class MenuManager : MonoBehaviour
 	public GameObject MainMenuPanel;
 	public GameObject MainMenuHostPanel;
 	public GameObject MainMenuJoinPanel;
-	public MyLobbyManager NetworkLobbyManager;
+	private MyLobbyManager _networkLobbyManager;
 	
 
 	// Use this for initialization
 	void Start () {
 		SwitchToPanel(MainMenuPanel);
-		NetworkLobbyManager.StartMatchMaker();
+		_networkLobbyManager = GameObject.Find("NetworkManager").GetComponent<MyLobbyManager>();
+		
+		_networkLobbyManager.StartMatchMaker();
 	}
 
 	public void SwitchToPanel(GameObject panel)
@@ -31,9 +33,9 @@ public class MenuManager : MonoBehaviour
 
 	public void HostGameLobby()
 	{
-		if (NetworkLobbyManager.matchMaker != null)
+		if (_networkLobbyManager.matchMaker != null)
 		{
-			NetworkLobbyManager.matchMaker.CreateMatch("TESTNAME",
+			_networkLobbyManager.matchMaker.CreateMatch(SystemInfo.deviceName,
             			4,
             			true,
             			"",
@@ -41,17 +43,14 @@ public class MenuManager : MonoBehaviour
             			"",
             			0,
             			0,
-            			NetworkLobbyManager.OnMatchCreate);
+            			_networkLobbyManager.OnMatchCreate);
 		}
 		
 	}
 
 	public void StopLobby()
 	{
-		NetworkLobbyManager.StopHost();
-		
-		NetworkLobbyManager.StartMatchMaker();
-		
+		_networkLobbyManager.StopHost();
 	}
 	
 }

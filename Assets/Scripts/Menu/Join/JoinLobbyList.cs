@@ -8,7 +8,7 @@ public class JoinLobbyList : MonoBehaviour
 
 	public GameObject ListPanel;
 	public GameObject ListEntry;
-	public MyLobbyManager NetworkLobbyManager;
+	private MyLobbyManager _networkLobbyManager;
 	
 	public MenuManager MenuManager;
 	public GameObject LandingPanel;
@@ -17,7 +17,7 @@ public class JoinLobbyList : MonoBehaviour
 	
 	// Use this for initialization
 	void Start () {
-		
+		_networkLobbyManager = GameObject.Find("NetworkManager").GetComponent<MyLobbyManager>();
 	}
 	
 	// Update is called once per frame
@@ -35,7 +35,7 @@ public class JoinLobbyList : MonoBehaviour
 
 	private void CreateList()
 	{
-		NetworkLobbyManager.matchMaker.ListMatches(0, 20, "", false, 0, 0, NetworkLobbyManager.OnMatchList);
+		_networkLobbyManager.matchMaker.ListMatches(0, 20, "", false, 0, 0, _networkLobbyManager.OnMatchList);
 
 		foreach (Transform child in ListPanel.transform)
 		{
@@ -44,9 +44,9 @@ public class JoinLobbyList : MonoBehaviour
 
 		int offset = 0;
 		int contentsize = 0;
-		if (NetworkLobbyManager.matches != null)
+		if (_networkLobbyManager.matches != null)
 		{
-			foreach (MatchInfoSnapshot match in NetworkLobbyManager.matches)
+			foreach (MatchInfoSnapshot match in _networkLobbyManager.matches)
 			{
 				GameObject tmpListEntry = Instantiate(ListEntry);
 
@@ -59,7 +59,7 @@ public class JoinLobbyList : MonoBehaviour
 
 				tmpListEntry.GetComponent<JoinLobbyListEntry>().SetMatch(match);
 
-				tmpListEntry.GetComponent<JoinLobbyListEntry>().SetNetworkManager(NetworkLobbyManager);
+				tmpListEntry.GetComponent<JoinLobbyListEntry>().SetNetworkManager(_networkLobbyManager);
 				
 				tmpListEntry.GetComponent<JoinLobbyListEntry>().SetName(match.name);
 				

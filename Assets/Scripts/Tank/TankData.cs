@@ -11,6 +11,9 @@ public class TankData : NetworkBehaviour
 	public Material[] Materials;
 
 	[SyncVar]
+	private int _playercount;
+
+	[SyncVar]
 	private int _points = 0;
 	
 	[SyncVar]
@@ -65,5 +68,15 @@ public class TankData : NetworkBehaviour
 	public int GetColor()
 	{
 		return _tankColor;
+	}
+
+	public void SetPlayerCount(int c)
+	{
+		_playercount = c;
+	}
+
+	public int GetPlayerCount()
+	{
+		return _playercount;
 	}
 }

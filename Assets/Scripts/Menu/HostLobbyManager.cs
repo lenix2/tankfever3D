@@ -10,34 +10,35 @@ public class HostLobbyManager : MonoBehaviour
 {
 
 	public List<GameObject> PlayerPanels;
-	public MyLobbyManager NetworkLobbyManager;
+	private MyLobbyManager _networkLobbyManager;
 
-	private float Timer;
+	private float _timer;
 
 
 	// Use this for initialization
 	void Start()
 	{
-		Timer = 0f;
+		_networkLobbyManager = GameObject.Find("NetworkManager").GetComponent<MyLobbyManager>();
+		_timer = 0f;
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-		Timer += Time.deltaTime;
+		_timer += Time.deltaTime;
 
-		if (Timer > 0.3f)
+		if (_timer > 0.3f)
 		{
-			Timer = 0f;
+			_timer = 0f;
 
 			// Check for Lobby-Players
-			for (int i = 0; i < NetworkLobbyManager.lobbySlots.Length; i++)
+			for (int i = 0; i < _networkLobbyManager.lobbySlots.Length; i++)
 			{
-				if (NetworkLobbyManager.lobbySlots[i] != null)
+				if (_networkLobbyManager.lobbySlots[i] != null)
 				{
 					PlayerPanels[i].SetActive(true);
 
-					if (NetworkLobbyManager.lobbySlots[i].readyToBegin)
+					if (_networkLobbyManager.lobbySlots[i].readyToBegin)
 					{
 						PlayerPanels[i].GetComponentsInChildren<Text>()[0].enabled = true;
 					}
@@ -47,7 +48,7 @@ public class HostLobbyManager : MonoBehaviour
 					}
 					
 					// Set Colorindex
-					NetworkLobbyManager.lobbySlots[i].gameObject.GetComponent<ColorControll>().SetColor(i);
+					_networkLobbyManager.lobbySlots[i].gameObject.GetComponent<ColorControll>().SetColor(i);
 				}
 				else
 				{
@@ -59,21 +60,21 @@ public class HostLobbyManager : MonoBehaviour
 
 	public void SwitchReady()
 	{
-		for (int i = 0; i < NetworkLobbyManager.lobbySlots.Length; i++)
+		for (int i = 0; i < _networkLobbyManager.lobbySlots.Length; i++)
 		{
-			if (NetworkLobbyManager.lobbySlots[i] != null)
+			if (_networkLobbyManager.lobbySlots[i] != null)
 			{
-				if (NetworkLobbyManager.lobbySlots[i].hasAuthority) // Get Local LobbyPlayer
+				if (_networkLobbyManager.lobbySlots[i].hasAuthority) // Get Local LobbyPlayer
 				{
 					
 					// Set Ready/Not Ready
-					if (!NetworkLobbyManager.lobbySlots[i].readyToBegin)
+					if (!_networkLobbyManager.lobbySlots[i].readyToBegin)
 					{
-						NetworkLobbyManager.lobbySlots[i].SendReadyToBeginMessage();
+						_networkLobbyManager.lobbySlots[i].SendReadyToBeginMessage();
 					}
 					else
 					{
-						NetworkLobbyManager.lobbySlots[i].SendNotReadyToBeginMessage();
+						_networkLobbyManager.lobbySlots[i].SendNotReadyToBeginMessage();
 					}
 				}
 			}

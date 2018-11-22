@@ -1,31 +1,81 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class GameManager : NetworkBehaviour
 {
 
 	public GameInfo GameInfo;
 	public PointsInfo PointsInfo;
+	public Text DebugText;
 
 	private GameObject[] _tanks;
 	private GameObject[] _spawns;
+
+	private int _playercount;
+	private bool _startupReady;
 	
 	// Use this for initialization
-	void Start () {
-		_tanks = GameObject.FindGameObjectsWithTag("Tank");
-		_spawns = GameObject.FindGameObjectsWithTag("Spawn");
+	void Start ()
+	{
+		_startupReady = false;
+		DoStartup();
+	}
 
-		foreach (var t in _tanks)
+	/**
+	 * Prepare all players
+	 */
+	private void DoStartup()
+	{
+		if (!_startupReady)
 		{
-			t.GetComponent<TankHealth>().SetGameManager(this);
+			_tanks = GameObject.FindGameObjectsWithTag("Tank");
+			_spawns = GameObject.FindGameObjectsWithTag("Spawn");
+
+			if (_tanks.Length == 0)
+			{
+				_playercount = 1;
+			}
+			else
+			{
+				_playercount = _tanks[0].GetComponent<TankData>().GetPlayerCount();
+
+				if (_playercount == 0)
+				{
+					_playercount = 1;
+				}
+			}
+			
+			foreach (var t in _tanks)
+			{
+				t.GetComponent<TankHealth>().SetGameManager(this);
+			}
+			
+			PointsInfo.SetTanks(_tanks);
+			PointsInfo.UpdatePoints();
+			DisableTanks();
+			SetTanksUnactive();
+			EnableTanks();
+			SpawnTanks();
+	
+			DebugText.text = _tanks.Length + "/" + _playercount;
+			
+			if (_playercount == _tanks.Length)
+			{
+				_startupReady = true;
+				DebugText.text = "";
+				StartRound();
+			}	
 		}
 		
-		PointsInfo.SetTanks(_tanks);
-		PointsInfo.UpdatePoints();
-		DisableTanks();
-		StartRound();
+	}
+
+	public void NewTankLoaded()
+	{
+		DoStartup();
 	}
 
 	private void StartRound()
@@ -92,9 +142,26 @@ public class GameManager : NetworkBehaviour
 
 	private void NextRound()
 	{
-		PointsInfo.UpdatePoints();
+		UpdatePoints();
 		DisableTanks();
-		StartRound();
+		
+		GameObject winner = CheckForWinner();
+
+		if (winner == null)
+		{
+			StartRound();
+		}
+		else
+		{
+			DebugText.text = "GameOver";
+			Invoke("QuitGame", 5);
+		}
+	}
+
+	// To Enable Invoke-use
+	private void UpdatePoints()
+	{
+		PointsInfo.UpdatePoints();
 	}
 
 	public void TankDied(GameObject go)
@@ -118,11 +185,57 @@ public class GameManager : NetworkBehaviour
 				RpcNextRound();
 			}
 		}
+		
+		Invoke("UpdatePoints", 1);
 	}
 
 	[ClientRpc]
 	private void RpcNextRound()
 	{
 		Invoke("NextRound", 3);
+	}
+
+	private GameObject CheckForWinner()
+	{
+		List<GameObject> winners = new List<GameObject>();
+		
+		GameObject winner = null;
+		
+		foreach (GameObject t in _tanks)
+		{
+			if (t.GetComponent<TankData>().GetPoints() >= (_tanks.Length - 1) * 10)
+			{
+				winners.Add(t);
+			}
+		}
+
+		if (winners.Count == 1)
+		{
+			return winners[0];
+		} else if (winners.Count > 1)
+		{
+			int maxPoints = 0;
+			
+			foreach (GameObject t in winners)
+			{
+				if (t.GetComponent<TankData>().GetPoints() >= maxPoints + 2)
+				{
+					maxPoints = t.GetComponent<TankData>().GetPoints();
+					winner = t;
+				} else if (t.GetComponent<TankData>().GetPoints() >= maxPoints - 2)
+				{
+					winner = null;
+				}
+			}
+		}
+
+		return winner;
+	}
+
+	private void QuitGame()
+	{
+		MyLobbyManager networkLobbyManager = GameObject.Find("NetworkManager").GetComponent<MyLobbyManager>();
+		
+		networkLobbyManager.StopHost();
 	}
 }

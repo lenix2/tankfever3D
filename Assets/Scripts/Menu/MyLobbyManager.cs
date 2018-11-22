@@ -13,6 +13,8 @@ public class MyLobbyManager : NetworkLobbyManager
 		gamePlayer.gameObject.GetComponent<TankData>().SetColor(lobbyPlayer.gameObject.GetComponent<ColorControll>()
 					.GetColor()); 
 		
+		gamePlayer.gameObject.GetComponent<TankData>().SetPlayerCount(this.numPlayers);
+		
 		return base.OnLobbyServerSceneLoadedForPlayer(lobbyPlayer, gamePlayer);
 	}
 }
