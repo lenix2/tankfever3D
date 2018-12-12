@@ -35,7 +35,7 @@ public class MenuManager : MonoBehaviour
 	{
 		if (_networkLobbyManager.matchMaker != null)
 		{
-			_networkLobbyManager.matchMaker.CreateMatch(SystemInfo.deviceName,
+			_networkLobbyManager.matchMaker.CreateMatch("GameLobby",
             			4,
             			true,
             			"",
