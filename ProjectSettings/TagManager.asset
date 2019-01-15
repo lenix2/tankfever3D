@@ -11,6 +11,7 @@ TagManager:
   - Item
   - Spawn
   - Gamemanager
+  - Loot
   layers:
   - Default
   - TransparentFX

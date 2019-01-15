@@ -46,7 +46,6 @@ public class TankShoot : NetworkBehaviour
 	[Command]
 	private void CmdShoot()
 	{
-		//Instantiate the prefab
 		GameObject m_Bullet = Instantiate(Bullet);
 
 		m_Bullet.transform.position = transform.position + transform.forward * 5;

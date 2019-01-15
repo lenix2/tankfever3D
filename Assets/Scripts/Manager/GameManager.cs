@@ -11,12 +11,14 @@ public class GameManager : NetworkBehaviour
 	public GameInfo GameInfo;
 	public PointsInfo PointsInfo;
 	public Text DebugText;
+	public GameObject ItemManager;
 
 	private GameObject[] _tanks;
 	private GameObject[] _spawns;
 
 	private int _playercount;
 	private bool _startupReady;
+	
 	
 	// Use this for initialization
 	void Start ()
@@ -34,7 +36,8 @@ public class GameManager : NetworkBehaviour
 		{
 			_tanks = GameObject.FindGameObjectsWithTag("Tank");
 			_spawns = GameObject.FindGameObjectsWithTag("Spawn");
-
+			ItemManager.SetActive(false);
+			
 			if (_tanks.Length == 0)
 			{
 				_playercount = 1;
@@ -83,6 +86,8 @@ public class GameManager : NetworkBehaviour
 		SetTanksUnactive();
 		EnableTanks();
 		SpawnTanks();
+		ItemManager.GetComponent<LootManager>().RemoveAllLootcrates();
+		ItemManager.GetComponent<LootManager>().RemoveAllItemEffects();
 		GameInfo.SetCountdown(3, "GO!");
 		Invoke("SetTanksActive", 3);
 	}
@@ -107,6 +112,7 @@ public class GameManager : NetworkBehaviour
 		{
 			t.SetActive(true);
 		}
+		
 	}
 
 	private void SetTanksActive()
@@ -118,6 +124,8 @@ public class GameManager : NetworkBehaviour
 			t.GetComponent<TankShoot>().enabled = true;
 			//t.GetComponent<TankRotate>().enabled = true;
 		}
+		
+		ItemManager.SetActive(true);
 	}
 
 	private void SetTanksUnactive()
@@ -129,6 +137,8 @@ public class GameManager : NetworkBehaviour
 			t.GetComponent<TankShoot>().enabled = false;
 			//t.GetComponent<TankRotate>().enabled = false;
 		}
+		
+		ItemManager.SetActive(false);
 	}
 
 	private void SpawnTanks()

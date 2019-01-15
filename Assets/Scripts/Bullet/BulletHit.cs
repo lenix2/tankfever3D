@@ -48,6 +48,15 @@ public class BulletHit : NetworkBehaviour
 				NetworkServer.Destroy(gameObject);
 				NetworkServer.Destroy(other.gameObject);
 			}
+		} else if (other.CompareTag("Loot"))
+		{
+			Explode();
+			
+			if (isServer)
+			{
+				NetworkServer.Destroy(gameObject);
+				NetworkServer.Destroy(other.gameObject);
+			}
 		}
 	}
 

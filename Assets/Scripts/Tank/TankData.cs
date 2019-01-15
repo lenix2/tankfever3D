@@ -6,7 +6,10 @@ using UnityEngine.Networking;
 public class TankData : NetworkBehaviour
 {
 
-	public MeshRenderer MeshRenderer;
+	public MeshRenderer MeshRenderer1_1;
+	public MeshRenderer MeshRenderer1_2;
+	public MeshRenderer MeshRenderer2_1;
+	public MeshRenderer MeshRenderer2_2;
 
 	public Material[] Materials;
 
@@ -39,15 +42,16 @@ public class TankData : NetworkBehaviour
 		int c1 = _tankColor;
 		int c2 = _tankColor + 4;
 
-	    Material[] tmpMats = MeshRenderer.materials;
+	    Material[] tmpMats1 = new Material[1];
+	    Material[] tmpMats2 = new Material[1];
 		
-		tmpMats[0] = Materials[c1];
-		tmpMats[2] = Materials[c2];
-		tmpMats[4] = Materials[c1];
-		tmpMats[7] = Materials[c1];
-		tmpMats[8] = Materials[c1];
+		tmpMats1[0] = Materials[c1];
+		tmpMats2[0] = Materials[c2];
 
-		MeshRenderer.materials = tmpMats;
+		MeshRenderer1_1.materials = tmpMats1;
+		MeshRenderer1_2.materials = tmpMats2;
+		MeshRenderer2_1.materials = tmpMats1;
+		MeshRenderer2_2.materials = tmpMats2;
 	}
 	
 	public void AddPoints(int p)
