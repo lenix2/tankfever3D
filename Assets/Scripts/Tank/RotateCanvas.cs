@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// rotate tank info canvas to camera
 public class RotateCanvas : MonoBehaviour
 {
 
 	public Transform Canvas;
-	
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void Update () {

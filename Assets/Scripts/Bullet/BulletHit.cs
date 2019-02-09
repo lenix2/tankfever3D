@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+/*
+ * Manager bullet collisions
+ */
 public class BulletHit : NetworkBehaviour
 {
 
@@ -10,36 +13,26 @@ public class BulletHit : NetworkBehaviour
 
 	private float _dmg = 25f;
 	
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+	// On Trigger Collision
 	private void OnTriggerEnter(Collider other)
 	{
+		// Collision with border
 		if(other.CompareTag("Border"))
 		{
 			Explode();
-
 			if (isServer)
 			{
 				NetworkServer.Destroy(gameObject);
 			}
-		} else if (other.CompareTag("Tank"))
+		} else if (other.CompareTag("Tank")) // Collision with Tank
 		{
 			Explode();
-			
 			if (isServer)
 			{
 				NetworkServer.Destroy(gameObject);
-				other.gameObject.GetComponent<TankHealth>().DoDmg(_dmg);
+				other.gameObject.GetComponent<TankHealth>().DoDmg(_dmg); // Do Damage
 			}
-		} else if (other.CompareTag("Bullet"))
+		} else if (other.CompareTag("Bullet")) // Collision with other bullets
 		{
 			Explode();
 			
@@ -48,7 +41,7 @@ public class BulletHit : NetworkBehaviour
 				NetworkServer.Destroy(gameObject);
 				NetworkServer.Destroy(other.gameObject);
 			}
-		} else if (other.CompareTag("Loot"))
+		} else if (other.CompareTag("Loot")) // Collision with Lootboxes
 		{
 			Explode();
 			
@@ -60,6 +53,7 @@ public class BulletHit : NetworkBehaviour
 		}
 	}
 
+	// Play Explosion
 	private void Explode()
 	{
 		Instantiate(Explosion, transform.position, transform.rotation);

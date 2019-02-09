@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Play Environment Explosion
+ */
 public class EnviromentExplosion : MonoBehaviour
 {
 
 	public List<ParticleSystem> ParticleSystems;
-	public float Lifetime = 1f;
+	public float Lifetime = 1f; // Explosiontime
 
 	private float _timer = 0f;
 	

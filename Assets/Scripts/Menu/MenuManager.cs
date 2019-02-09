@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.SimpleLocalization;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
@@ -18,7 +19,7 @@ public class MenuManager : MonoBehaviour
 	void Start () {
 		SwitchToPanel(MainMenuPanel);
 		_networkLobbyManager = GameObject.Find("NetworkManager").GetComponent<MyLobbyManager>();
-		
+		LocalizationManager.Read();
 		_networkLobbyManager.StartMatchMaker();
 	}
 
@@ -29,6 +30,19 @@ public class MenuManager : MonoBehaviour
 		MainMenuJoinPanel.SetActive(false);
 		
 		panel.SetActive(true);
+	}
+
+	public void ToggleLocalization()
+	{
+		if (LocalizationManager.Language.Contains("English"))
+		{
+			LocalizationManager.Language = "German";
+		}
+		else
+		{
+			LocalizationManager.Language = "English";
+		}
+		
 	}
 
 	public void HostGameLobby()

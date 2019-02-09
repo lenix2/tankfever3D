@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+/**
+ * Manage Tank rotation
+ */
 public class TankRotate : NetworkBehaviour
 {
 
@@ -14,10 +17,9 @@ public class TankRotate : NetworkBehaviour
 	void Start () {
 		if (!isLocalPlayer)
 		{
-			Destroy(this);
+			Destroy(this); // only rotate ur own tank
 		}
-		
-		
+	
 		GameObject[] go = GameObject.FindGameObjectsWithTag("MobileController");
         
 		foreach (GameObject mc in go)
@@ -29,22 +31,25 @@ public class TankRotate : NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		float rot = Input.GetAxis("Horizontal");
+		float rot = Input.GetAxis("Horizontal"); // rotate with buttons
 		if (TurnStick != null)
 		{
-			rot += TurnStick.Horizontal;
+			rot += TurnStick.Horizontal; // rotate with stick
 		}
 		if ( rot > 0.1f || rot < -0.1f)
 		{
-			Rotate(rot);
+			Rotate(rot); // do rotation
 		}
 	}
 
+	/*
+	 * Do rotation relative to deltatime
+	 */
 	private void Rotate(float r)
 	{
 		this.gameObject.transform.eulerAngles =  new Vector3(
-			this.gameObject.transform.eulerAngles.x,
-			this.gameObject.transform.eulerAngles.y + r * _turnspeed * Time.deltaTime,
-			this.gameObject.transform.eulerAngles.z);
+		this.gameObject.transform.eulerAngles.x,
+		this.gameObject.transform.eulerAngles.y + r * _turnspeed * Time.deltaTime,
+		this.gameObject.transform.eulerAngles.z);
 	}
 }

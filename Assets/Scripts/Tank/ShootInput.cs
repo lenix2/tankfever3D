@@ -3,18 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+// manage button input
 public class ShootInput : NetworkBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	public void Shoot()
 	{
 		GameObject[] go = GameObject.FindGameObjectsWithTag("Tank");
@@ -23,6 +13,7 @@ public class ShootInput : NetworkBehaviour {
 		{
 			if (tank.GetComponent<NetworkIdentity>().isLocalPlayer)
 			{
+				// lets local player tank shoot
 				tank.GetComponent<TankShoot>().DoShoot();
 			}
 		}

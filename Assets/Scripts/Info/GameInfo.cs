@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * Log basic infos 
+ */
 public class GameInfo : MonoBehaviour
 {
 
@@ -17,12 +20,8 @@ public class GameInfo : MonoBehaviour
 	{
 		Infotext.text = "";
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
+	// Start a Countdown with given Ending-Text
 	public void SetCountdown(int time, String txt)
 	{
 		_time = time;
@@ -32,10 +31,12 @@ public class GameInfo : MonoBehaviour
 		Invoke("DoCountdown", 1);
 	}
 
+	// Do Countdown steps
 	private void DoCountdown()
 	{
 		_time--;
 
+		// StepByStep
 		if (_time <= 0)
 		{
 			if (_time <= -1)
@@ -49,7 +50,7 @@ public class GameInfo : MonoBehaviour
 			}
 		}
 		else
-		{
+		{ // Countdown End
 			Infotext.text = _time + "";
 			Invoke("DoCountdown", 1);
 		}

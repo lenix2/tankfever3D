@@ -37,14 +37,23 @@ public class HostLobbyManager : MonoBehaviour
 				if (_networkLobbyManager.lobbySlots[i] != null)
 				{
 					PlayerPanels[i].SetActive(true);
-
+					Text[] texts;
+					texts = PlayerPanels[i].GetComponentsInChildren<Text>();
+					
 					if (_networkLobbyManager.lobbySlots[i].readyToBegin)
 					{
-						PlayerPanels[i].GetComponentsInChildren<Text>()[0].enabled = true;
+						if (texts.Length > 0)
+						{
+							texts[0].enabled = true;
+						}
 					}
 					else
 					{
-						PlayerPanels[i].GetComponentsInChildren<Text>()[0].enabled = false;
+						texts = PlayerPanels[i].GetComponentsInChildren<Text>();
+						if (texts.Length > 0)
+						{
+							texts[0].enabled = false;
+						}
 					}
 					
 					// Set Colorindex

@@ -3,28 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * Update player Points
+ */
 public class PointsInfo : MonoBehaviour
 {
 
 	public Text[] Pointtexts;
 
 	private GameObject[] _tanks;
-	
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public void SetTanks(GameObject[] tanks)
 	{
 		_tanks = tanks;
 	}
 
+	/*
+	 * Print every Score to the scoreboard
+	 */
 	public void UpdatePoints()
 	{
 		for (int i = 0; i < Pointtexts.Length; i++)

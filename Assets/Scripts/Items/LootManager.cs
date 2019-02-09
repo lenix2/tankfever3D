@@ -4,20 +4,26 @@ using emotitron.NST;
 using UnityEngine;
 using UnityEngine.Networking;
 
+/**
+ * Manage Itemspawn
+ */
 public class LootManager : NetworkBehaviour
 {
     public GameObject LootPrefab;
-
-    private float _secToSpawn = 1f;
-    private float _spawnChance = 0.2f;
+    public float[] TypeChances; // Array of types and chances
+    
+    private float _secToSpawn = 1f; // Spawninterval
+    private float _spawnChance = 0.35f; // Spawnchance
 
     private float _timer;
+    
     // Start is called before the first frame update
     void Start()
     {
         _timer = 0f;
         if (!isServer)
         {
+            // Only ceep on server
             Destroy(this);
         }
     }
@@ -29,27 +35,64 @@ public class LootManager : NetworkBehaviour
 
         if (_timer > _secToSpawn)
         {
+            // check for Lootspawn
             RollLoot();
             _timer -= _secToSpawn;
         }
     }
 
-    private void SpawnLoot()
+    // Do Lootspawn
+    private void SpawnLoot(int id)
     {
         GameObject loot = Instantiate(LootPrefab);
-        Vector3 pos = new Vector3((Random.value * 80) - 40, 1, (Random.value * 80) - 40);
+        Vector3 pos = new Vector3((Random.value * 80) - 40, 15f, (Random.value * 80) - 40);
         loot.transform.position = pos; 
+        
+        // Network init
         NetworkServer.Spawn(loot);
+        
+        // Change type
+        loot.GetComponent<Item>().SetItemType(id);
     }
 
+    // Check if loot should spawn
     private void RollLoot()
     {
         if (Random.value < _spawnChance)
         {
-            SpawnLoot();
+            SpawnLoot(CalculateItemType());
         }
     }
 
+    // Calculate itemtype
+    private int CalculateItemType()
+    {
+        float maxProp = 0f;
+
+        // get total propability-count
+        foreach (float f in TypeChances)
+        {
+            maxProp += f;
+        }
+
+        // find type
+        float rdm = Random.value * maxProp;
+        float prop = 0f;
+        for (int i = 0; i < TypeChances.Length; i++)
+        {
+            prop += TypeChances[i];
+            if (rdm <= prop)
+            {
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+    /*
+     * Delete all Lootcrates
+     */
     public void RemoveAllLootcrates()
     {
         GameObject[] loot = GameObject.FindGameObjectsWithTag("Loot");
@@ -60,6 +103,9 @@ public class LootManager : NetworkBehaviour
         }
     }
 
+    /*
+     * Remove all item Effects from tanks 
+     */
     public void RemoveAllItemEffects()
     {
         GameObject[] loot = GameObject.FindGameObjectsWithTag("Tank");

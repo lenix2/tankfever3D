@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+/*
+ * Bullet Movement
+ */
 public class BulletMove : NetworkBehaviour
 {
 
-	private float _speed = 20f;
-	
-	// Use this for initialization
-	void Start () {
-	}
+	private float _speed = 20f; // Speed
 	
 	// Update is called once per frame
 	void Update ()
@@ -20,6 +19,7 @@ public class BulletMove : NetworkBehaviour
 
 	private void Move()
 	{
+		// Update Position
 		this.gameObject.transform.position += this.gameObject.transform.forward * Time.deltaTime * _speed;
 	}
 }

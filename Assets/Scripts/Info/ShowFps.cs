@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * Log frames/second
+ */
 public class ShowFps : MonoBehaviour {
 	
 	public Text fpsText;

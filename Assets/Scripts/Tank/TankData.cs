@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+/*
+ * store tank information
+ */
 public class TankData : NetworkBehaviour
 {
 
+	// Renderer objects
 	public MeshRenderer MeshRenderer1_1;
 	public MeshRenderer MeshRenderer1_2;
 	public MeshRenderer MeshRenderer2_1;
 	public MeshRenderer MeshRenderer2_2;
 
+	// List of materials for this tank (colors)
 	public Material[] Materials;
 
 	[SyncVar]
@@ -21,19 +26,10 @@ public class TankData : NetworkBehaviour
 	
 	[SyncVar]
 	private int _tankColor = 0;
-	
-	// Use this for initialization
-	void Start () {
-	}
 
 	private void OnEnable()
 	{
-		ApplyColor();
-	}
-
-	// Update is called once per frame
-	void Update () {
-		
+		ApplyColor(); // set color to tank
 	}
 
 	// apply color to model

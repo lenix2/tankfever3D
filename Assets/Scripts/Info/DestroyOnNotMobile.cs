@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Net.Mime;
 using UnityEngine;
 
+/**
+ * Destroy this object if platform isn't Android
+ */
 public class DestroyOnNotMobile : MonoBehaviour {
 
 	// Use this for initialization
@@ -11,10 +14,5 @@ public class DestroyOnNotMobile : MonoBehaviour {
 		{
 			Destroy(this.gameObject);
 		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }

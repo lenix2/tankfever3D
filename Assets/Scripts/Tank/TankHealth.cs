@@ -5,10 +5,13 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
+/**
+ * Manage Tanks energy
+ */
 public class TankHealth : NetworkBehaviour
 {
 
-	public Slider HealthSlider;
+	public Slider HealthSlider; // Healthbar
 	public GameObject Explosion;
 	
 	[SyncVar]
@@ -23,7 +26,7 @@ public class TankHealth : NetworkBehaviour
 	
 	void Start ()
 	{
-		GameObject[] go = GameObject.FindGameObjectsWithTag("Gamemanager");
+		GameObject[] go = GameObject.FindGameObjectsWithTag("Gamemanager"); //find gamemanager
 
 		if (go.Length > 0)
 		{
@@ -37,6 +40,7 @@ public class TankHealth : NetworkBehaviour
 		_gameManager = gm;
 	}
 
+	// set start Health parameter
 	private void OnEnable()
 	{
 		Hitpoints = _maxHP;
@@ -53,20 +57,24 @@ public class TankHealth : NetworkBehaviour
 		UpdateHP();
 	}
 
+	// collision handling
 	private void OnCollisionEnter(Collision other)
 	{
+		// collision with border
 		if(other.collider.CompareTag("Border"))
 		{
 			if (isServer)
 			{
-				DoDmg(1000f);
+				DoDmg(1000f); // destroy
 			}
 		}
 
+		// collision with other tanks
 		if (other.collider.CompareTag("Tank"))
 		{
 			if (isServer)
 			{
+				// kill tank with less hp first
 				if (other.gameObject.GetComponent<TankHealth>().GetHp() > GetHp())
 				{
 					DoDmg(1000f);

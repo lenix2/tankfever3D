@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+/**
+ * Tank drives forward 
+ */
 public class TankDrive : NetworkBehaviour
 {
 
 	private float _speed = 8f;
-	
-	// Use this for initialization
-	void Start () {
-	}
 	
 	// Update is called once per frame
 	void Update ()

@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
+/**
+ * Log network Bandwidth
+ */
 public class ShowBandwidth : NetworkBehaviour {
 
 	private float _networkTotal = 0f;

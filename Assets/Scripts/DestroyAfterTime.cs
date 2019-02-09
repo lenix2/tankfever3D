@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Destroy this object after given time
+ */
 public class DestroyAfterTime : MonoBehaviour
 {
 
 	public float Deathtimer;
-	
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
+
 	// Update is called once per frame
 	void Update ()
 	{
