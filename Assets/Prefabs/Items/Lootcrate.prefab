@@ -82,9 +82,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   na: {fileID: 8257630935795504940}
   ghostGO: {fileID: 0}
-  _state: 2
+  _state: 1
   ignoreStateUntil: 2
-  sendEveryXTick: 6
+  sendEveryXTick: 3
   desiredBufferMS: 0.1
   bufferDriftCorrectAmt: 0.1
   autoKinematic: 0
@@ -331,6 +331,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1068252088383255566}
     m_Modifications:
+    - target: {fileID: 100000, guid: ebdf5029633472d4e99bd7632dbd81a7, type: 3}
+      propertyPath: m_Name
+      value: Crate_normal
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ebdf5029633472d4e99bd7632dbd81a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -387,10 +391,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 200
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: ebdf5029633472d4e99bd7632dbd81a7, type: 3}
-      propertyPath: m_Name
-      value: Crate_normal
-      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: ebdf5029633472d4e99bd7632dbd81a7, type: 3}
       propertyPath: m_ReceiveShadows
       value: 1
@@ -424,6 +424,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1068252088383255566}
     m_Modifications:
+    - target: {fileID: 100000, guid: ebdf5029633472d4e99bd7632dbd81a7, type: 3}
+      propertyPath: m_Name
+      value: Crate_shotgun
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ebdf5029633472d4e99bd7632dbd81a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -479,10 +483,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: ebdf5029633472d4e99bd7632dbd81a7, type: 3}
       propertyPath: m_LocalScale.z
       value: 378.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: ebdf5029633472d4e99bd7632dbd81a7, type: 3}
-      propertyPath: m_Name
-      value: Crate_shotgun
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: ebdf5029633472d4e99bd7632dbd81a7, type: 3}
       propertyPath: m_ReceiveShadows
