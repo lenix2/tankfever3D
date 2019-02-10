@@ -5,6 +5,7 @@ using UnityEngine.Networking.Match;
 using UnityEngine;
 using UnityEngine.UI;
 
+// manage lobby list entrys (buttons)
 public class JoinLobbyListEntry : MonoBehaviour {
 
 	public Text LobbyName;
@@ -15,11 +16,7 @@ public class JoinLobbyListEntry : MonoBehaviour {
 	private MenuManager _menuManager;
 	private GameObject _landingPanel;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-
+	// Setter
 	public void SetMatch(MatchInfoSnapshot m) {
 		_match = m;
 	}
@@ -36,8 +33,11 @@ public class JoinLobbyListEntry : MonoBehaviour {
 		_networkLobbyManager = m;
 	}
 
+	// onclick connect to server
 	public void OnClick() {
+		// connect
 		_networkLobbyManager.matchMaker.JoinMatch (_match.networkId, "", "", "", 0, 0, _networkLobbyManager.OnMatchJoined);
+		// move to lobby-view
 		_menuManager.SwitchToPanel(_landingPanel);
 	}
 
