@@ -48,8 +48,13 @@ Click "Build"
 * **Lennard Rhenisch** - *Initial work* - [Github](https://github.com/lenix2)
 
 ## License
-
+GNU General Public License v3.0
 
 ## Acknowledgments
 
 * special thanks to Tobi for the tank model <3
+
+## Downloads
+
+* [Windows Build](https://github.com/lenix2/tankfever3D/releases/download/v1.0/Tankfever3D_Win.zip)
+* [Android Build](https://github.com/lenix2/tankfever3D/releases/download/v1.0/TankFever3D.apk)
