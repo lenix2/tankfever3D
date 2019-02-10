@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -14,6 +15,7 @@ public class TankData : NetworkBehaviour
 	public MeshRenderer MeshRenderer1_2;
 	public MeshRenderer MeshRenderer2_1;
 	public MeshRenderer MeshRenderer2_2;
+	private String _playerName = "";
 
 	// List of materials for this tank (colors)
 	public Material[] Materials;
@@ -48,6 +50,21 @@ public class TankData : NetworkBehaviour
 		MeshRenderer1_2.materials = tmpMats2;
 		MeshRenderer2_1.materials = tmpMats1;
 		MeshRenderer2_2.materials = tmpMats2;
+		
+		// apply name
+		if (_tankColor == 0)
+		{
+			_playerName = "Player.Red";
+		} else if (_tankColor == 1)
+		{
+			_playerName = "Player.Green";
+		} else if (_tankColor == 2)
+		{
+			_playerName = "Player.Blue";
+		} else if (_tankColor == 3)
+		{
+			_playerName = "Player.Purple";
+		}
 	}
 	
 	public void AddPoints(int p)
@@ -73,6 +90,11 @@ public class TankData : NetworkBehaviour
 	public void SetPlayerCount(int c)
 	{
 		_playercount = c;
+	}
+
+	public String GetPlayerName()
+	{
+		return _playerName;
 	}
 
 	public int GetPlayerCount()

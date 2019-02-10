@@ -5,3 +5,9 @@ Menu.MenuBack,Back,Zurück
 Lobby.Ready,Ready,Bereit
 Menu.Lobbyname,Name,Name
 Menu.Playercount,Players,Spieler
+Game.GameOver,The winner is, Der Sieger ist
+Game.Start,Go!,Los!
+Player.Red, Red, Rot
+Player.Green, Green, Grün
+Player.Blue, Blue, Blau
+Player.Purple, Purple, Lila

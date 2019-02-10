@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters;
+using Assets.SimpleLocalization;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -114,7 +115,7 @@ public class GameManager : NetworkBehaviour
 		}
 		
 		// Start countdown
-		GameInfo.SetCountdown(3, "GO!");
+		GameInfo.SetCountdown(3, LocalizationManager.Localize("Game.Start"));
 		Invoke("SetTanksActive", 3);
 	}
 
@@ -194,7 +195,7 @@ public class GameManager : NetworkBehaviour
 		else
 		{
 			// end game 
-			DebugText.text = "GameOver";
+			DebugText.text = LocalizationManager.Localize("Game.GameOver") + ": " + "\n" + LocalizationManager.Localize(winner.GetComponent<TankData>().GetPlayerName());
 			Invoke("QuitGame", 5);
 		}
 	}
@@ -226,7 +227,7 @@ public class GameManager : NetworkBehaviour
 			// start new round if 1 or less tanks are living
 			if (alive < 2)
 			{
-				Invoke("NextRound", 3);
+				// Invoke("NextRound", 3);
 				RpcNextRound();
 			}
 		}

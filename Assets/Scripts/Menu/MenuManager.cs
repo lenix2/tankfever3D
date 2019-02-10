@@ -36,8 +36,6 @@ public class MenuManager : MonoBehaviour
 		{
 			LocalizationManager.Language = "English";
 		}
-		
-		QualitySettings.SetQualityLevel(_quality, true);
 	}
 
 	// switch to other views
