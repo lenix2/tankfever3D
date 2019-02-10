@@ -29,8 +29,11 @@ If you want to test the complete application via the Unity Editor you have to di
 ## Deployment
 
 Click "File > BuildSettings"
+
 chose Windows or Android platform
+
 for Android: chose "All compatible devices"
+
 Click "Build"
 
 ## Built With
