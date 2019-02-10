@@ -64,5 +64,5 @@ GNU General Public License v3.0
 
 ## Downloads
 
-* [Windows Build](https://github.com/lenix2/tankfever3D/releases/download/v1.0/Tankfever3D_Win.zip)
-* [Android Build](https://github.com/lenix2/tankfever3D/releases/download/v1.0/TankFever3D.apk)
+* [Windows Build](https://github.com/lenix2/tankfever3D/releases/download/1.0/Tankfever3D_Win.zip)
+* [Android Build](https://github.com/lenix2/tankfever3D/releases/download/1.0/TankFever3D.apk)
