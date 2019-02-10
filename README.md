@@ -10,14 +10,19 @@ See deployment for notes on how to deploy the project on a live system.
 ### Prerequisites
 
 Unity3D Engine v. 2018.3.1f1
+
 Android SDK
+
 Unity3D Account
 
 ### Installing
 
 Download the Sourccode
+
 Start Unity
+
 Open the Project
+
 Enjoy
 
 ## Running the tests
